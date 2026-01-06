@@ -1,41 +1,55 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import daisyLogo from "/daisyui.svg";
-import viteLogo from "/vite.svg";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import Content from "./components/Content";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <>
-      <div className="bg-gray-100 flex items-center justify-center">
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-        <a href="https://v5.daisyui.com/" target="_blank">
-          <img src={daisyLogo} className="logo daisy" alt="Daisyui logo" />
-        </a>
-      </div>
-      <h1 className="text-5xl font-bold">Vite + React + DaisyUI</h1>
-      <div className="card">
-        <button
-          className="btn btn-neutral"
-          onClick={() => setCount((count) => count + 1)}
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black">
+      {/* Header */}
+      <Header />
+      
+      {/* Ana İçerik - Sidebar ve Content */}
+      <div className="flex">
+        {/* Sidebar - Mobilde gizlenebilir */}
+        {sidebarOpen && (
+          <div className="hidden lg:block">
+            <Sidebar />
+          </div>
+        )}
+        
+        {/* Sidebar Toggle Butonu (Mobil) */}
+        <button 
+          className="lg:hidden fixed bottom-4 left-4 z-50 btn btn-circle btn-primary shadow-lg"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
         >
-          count is {count}
+          {sidebarOpen ? "✕" : "☰"}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        
+        {/* Mobil Sidebar Overlay */}
+        {sidebarOpen && (
+          <div className="lg:hidden fixed inset-0 z-40">
+            <div 
+              className="absolute inset-0 bg-black bg-opacity-50"
+              onClick={() => setSidebarOpen(false)}
+            ></div>
+            <div className="absolute left-0 top-0 h-full w-64">
+              <Sidebar />
+            </div>
+          </div>
+        )}
+        
+        {/* Ana İçerik */}
+        <Content />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite, React, and DaisyUI logos to learn more
-      </p>
-    </>
+      
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }
 
