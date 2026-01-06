@@ -1,7 +1,6 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -16,6 +15,9 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+.logo.daisy:hover {
+  filter: drop-shadow(0 0 2em #5a21f6aa);
 }
 
 @keyframes logo-spin {
@@ -39,4 +41,39 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Özel casino temalı stiller */
+.casino-gradient {
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+}
+
+.slot-machine {
+  animation: slot-spin 1s ease-in-out;
+}
+
+@keyframes slot-spin {
+  0% { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.chip {
+  animation: chip-float 3s ease-in-out infinite;
+}
+
+@keyframes chip-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive tasarım için */
+@media (max-width: 768px) {
+  .logo {
+    height: 4em;
+    padding: 1em;
+  }
+  
+  h1 {
+    font-size: 2rem !important;
+  }
 }
